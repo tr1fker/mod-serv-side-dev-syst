@@ -16,6 +16,7 @@ public class StatementMenu {
         options.add("Просмотреть все записи");
         options.add("Добавить дефолтную информацию");
         options.add("Просмотреть отсортированных авторов по имени и фамилии");
+        options.add("Просмотреть книги изданные после определённого года, отсортировав их по году публикации");
         final String header = MenuUtils.getHeader("Меню Statement", options);
         while (true) {
             System.out.print(header);
@@ -35,6 +36,10 @@ public class StatementMenu {
                     }
                     case 4: {
                         statementAction.getAuthorsInfSrtFNLN();
+                        break;
+                    }
+                    case 5: {
+                        statementAction.getBooksSrtYByYear();
                         break;
                     }
                     case 0: {

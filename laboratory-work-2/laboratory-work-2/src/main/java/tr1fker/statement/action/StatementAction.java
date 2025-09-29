@@ -132,6 +132,29 @@ public class StatementAction {
         }
     }
 
+    public void getBooksSrtYByYear(){
+        int year;
+        while(true){
+            System.out.print("Введите год для поиска: ");
+            year = InputManager.getNextInt();
+            if (year < 0){
+                System.out.println("Год не может быть отрицательным!");
+            }else{
+                break;
+            }
+        }
+
+        List<Book> books = bookDao.getSrtYByYear(year);
+        if (books.isEmpty()){
+            System.out.println("Книги с указанным " + year + " не найдены!");
+            return;
+        }
+        System.out.println("[Книги по возрастанию году публикации]");
+        for (Book book: books){
+            System.out.println(book);
+        }
+    }
+
     private List<Author> getDefaultAuthors() {
         List<Author> authors = new ArrayList<>();
         authors.add(new Author("Лев", "Толстой"));

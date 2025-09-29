@@ -63,6 +63,27 @@ public class BookDao implements StatementDao<Book> {
         }
         return books;
     }
+
+    public List<Book> getSrtYByYear(int year){
+        List<Book> books = new ArrayList<>();
+        try (Statement stmt = ConnectionManager.getConnection().createStatement()){
+            ResultSet resultSet = stmt.executeQuery("SELECT * FROM books WHERE year_of_publication > "
+                    + year + " ORDER BY year_of_publication");
+            while (resultSet.next()) {
+                Book book = new Book();
+                book.setId(resultSet.getLong("id"));
+                book.setTitle(resultSet.getString("title"));
+                book.setAuthorId(resultSet.getLong("author_id"));
+                book.setYearOfPublication(resultSet.getInt("year_of_publication"));
+                books.add(book);
+            }
+        }catch (SQLException e) {
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return books;
+    }
+
     @Override
     public Book getById(Long id) {
         Book book = null;
