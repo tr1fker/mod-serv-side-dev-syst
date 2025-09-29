@@ -20,6 +20,7 @@ public class StatementMenu {
         options.add("Обновить название случайной книги, находящейся в определённом магазине");
         options.add("Просмотреть книги с именами авторов начинающиеся на определённую букву");
         options.add("Обновить имя авторов, чьи книги находятся в определённом магазине");
+        options.add("Просмотреть авторов с кол-во книг");
         final String header = MenuUtils.getHeader("Меню Statement", options);
         while (true) {
             System.out.print(header);
@@ -55,6 +56,10 @@ public class StatementMenu {
                     }
                     case 8: {
                         statementAction.updateFNAuthByNameShop();
+                        break;
+                    }
+                    case 9: {
+                        statementAction.getAllAuthWithCountBooks();
                         break;
                     }
                     case 0: {

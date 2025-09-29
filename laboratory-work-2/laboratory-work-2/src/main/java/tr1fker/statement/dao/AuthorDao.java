@@ -2,6 +2,8 @@ package tr1fker.statement.dao;
 
 import tr1fker.connection.ConnectionManager;
 import tr1fker.statement.model.Author;
+import tr1fker.statement.model.AuthorBookCount;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -111,5 +113,28 @@ public class AuthorDao implements StatementDao<Author> {
             logger.severe("Ошибка: " + e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    // Использование в методе
+    public List<AuthorBookCount> getAllAuthWithCountBooks(){
+        List<AuthorBookCount> authorsWithCount = new ArrayList<>();
+        try(Statement stmt = ConnectionManager.getConnection().createStatement()){
+            ResultSet resultSet = stmt.executeQuery("SELECT a.*, " +
+                    "(SELECT COUNT(*) FROM books WHERE author_id = a.id) as book_count FROM authors a");
+            while (resultSet.next()) {
+                Author author = new Author();
+                author.setId(resultSet.getLong("id"));
+                author.setFirstName(resultSet.getString("first_name"));
+                author.setLastName(resultSet.getString("last_name"));
+
+                int bookCount = resultSet.getInt("book_count");
+
+                authorsWithCount.add(new AuthorBookCount(author, bookCount));
+            }
+        }catch (SQLException e) {
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return authorsWithCount;
     }
 }

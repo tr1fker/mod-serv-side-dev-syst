@@ -4,10 +4,7 @@ import tr1fker.statement.dao.AuthorDao;
 import tr1fker.statement.dao.BookDao;
 import tr1fker.statement.dao.ShopBookDao;
 import tr1fker.statement.dao.ShopDao;
-import tr1fker.statement.model.Author;
-import tr1fker.statement.model.Book;
-import tr1fker.statement.model.Shop;
-import tr1fker.statement.model.ShopBook;
+import tr1fker.statement.model.*;
 import tr1fker.utils.InputManager;
 import tr1fker.utils.RandomManager;
 
@@ -286,6 +283,22 @@ public class StatementAction {
             System.out.println("Имена авторов успешно изменены!(" + res + ")");
         } catch (RuntimeException e){
             logger.severe("При изменении имён авторов произошла ошибка: " + e.getMessage());
+        }
+    }
+
+    public void getAllAuthWithCountBooks(){
+        try{
+            List<AuthorBookCount> authorBookCounts = authorDao.getAllAuthWithCountBooks();
+            if (authorBookCounts.isEmpty()){
+                System.out.println("Таблица авторов пуста!");
+            }else{
+                System.out.println("[Авторы с количеством книг]");
+                for (AuthorBookCount authorBookCount : authorBookCounts){
+                    System.out.println(authorBookCount);
+                }
+            }
+        }catch (RuntimeException e){
+            logger.severe("При поиске авторов с кол-во книг произошла ошибка: " + e.getMessage());
         }
     }
 
