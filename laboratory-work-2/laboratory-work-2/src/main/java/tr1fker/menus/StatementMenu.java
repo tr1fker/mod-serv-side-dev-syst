@@ -19,6 +19,7 @@ public class StatementMenu {
         options.add("Просмотреть книги изданные после определённого года, отсортировав их по году публикации");
         options.add("Обновить название случайной книги, находящейся в определённом магазине");
         options.add("Просмотреть книги с именами авторов начинающиеся на определённую букву");
+        options.add("Обновить имя авторов, чьи книги находятся в определённом магазине");
         final String header = MenuUtils.getHeader("Меню Statement", options);
         while (true) {
             System.out.print(header);
@@ -50,6 +51,10 @@ public class StatementMenu {
                     }
                     case 7: {
                         statementAction.getAllBooksByFLAuth();
+                        break;
+                    }
+                    case 8: {
+                        statementAction.updateFNAuthByNameShop();
                         break;
                     }
                     case 0: {

@@ -241,6 +241,54 @@ public class StatementAction {
         }
     }
 
+    public void updateFNAuthByNameShop(){
+        String nameShop;
+        while(true){
+            System.out.print("Введите название магазина: ");
+            nameShop = InputManager.getNextLine().trim();
+            if (nameShop.isEmpty()){
+                System.out.println("Название не может быть пустым!");
+            }else{
+                break;
+            }
+        }
+
+        Shop shop = shopDao.getByName(nameShop);
+        if (shop == null){
+            System.out.println("Магазин с названием '" + nameShop + "' не был найден!");
+            return;
+        }
+        long shopId = shop.getId();
+
+        List<ShopBook> shopBooks  = shopBookDao.getAllByShopId(shopId);
+        if (shopBooks.isEmpty()){
+            System.out.println("Магазин не содержит никаких книг!");
+            return;
+        }
+
+        String newFirstName;
+        while(true){
+            System.out.print("Введите новое имя авторам: ");
+            newFirstName = InputManager.getNextLine().trim();
+            if (newFirstName.isEmpty()){
+                System.out.println("Строка не может быть пустой!");
+            }else{
+                break;
+            }
+        }
+
+        try{
+            int res = authorDao.updateByShopId(shopId, newFirstName);
+            if (res == 0){
+                System.out.println("Не удалось изменить имена авторов!");
+                return;
+            }
+            System.out.println("Имена авторов успешно изменены!(" + res + ")");
+        } catch (RuntimeException e){
+            logger.severe("При изменении имён авторов произошла ошибка: " + e.getMessage());
+        }
+    }
+
     private List<Author> getDefaultAuthors() {
         List<Author> authors = new ArrayList<>();
         authors.add(new Author("Лев", "Толстой"));

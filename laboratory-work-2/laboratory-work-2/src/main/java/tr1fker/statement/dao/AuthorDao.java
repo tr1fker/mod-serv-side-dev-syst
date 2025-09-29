@@ -101,4 +101,15 @@ public class AuthorDao implements StatementDao<Author> {
         }
         return author;
     }
+
+    public int updateByShopId(long shopId, String newFirstName){
+        try(Statement stmt = ConnectionManager.getConnection().createStatement()){
+            return stmt.executeUpdate("UPDATE authors SET first_name = '" + newFirstName + "' " +
+                    "WHERE id IN (SELECT DISTINCT b.author_id FROM books b " +
+                    "JOIN shops_books sb ON b.id = sb.book_id WHERE sb.shop_id = '" + shopId + "')");
+        } catch (SQLException e) {
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 }
