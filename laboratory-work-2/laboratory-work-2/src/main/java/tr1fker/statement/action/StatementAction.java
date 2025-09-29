@@ -9,6 +9,8 @@ import tr1fker.statement.model.Book;
 import tr1fker.statement.model.Shop;
 import tr1fker.statement.model.ShopBook;
 import tr1fker.utils.InputManager;
+
+import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Logger;
 public class StatementAction {
@@ -112,6 +114,24 @@ public class StatementAction {
             logger.severe("При просмотре информации возникла ошибка: " + e.getMessage());
         }
     }
+
+    public void getAuthorsInfSrtFNLN(){
+        try {
+            List<Author> authors = authorDao.getSortedFNLN();
+            if (authors.isEmpty()){
+                System.out.println("Таблица авторов пуста!");
+            }else{
+                System.out.println("[Авторы]");
+                for (Author author: authors){
+                    System.out.println(author);
+                }
+            }
+        }catch (RuntimeException e){
+            logger.severe("При просмотре отсортированных авторов по имени и фамилии произошла ошибка: " +
+                    e.getMessage());
+        }
+    }
+
     private List<Author> getDefaultAuthors() {
         List<Author> authors = new ArrayList<>();
         authors.add(new Author("Лев", "Толстой"));

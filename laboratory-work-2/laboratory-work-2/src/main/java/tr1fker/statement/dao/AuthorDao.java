@@ -64,6 +64,25 @@ public class AuthorDao implements StatementDao<Author> {
         }
         return authors;
     }
+
+    public List<Author> getSortedFNLN(){
+        List<Author> authors = new ArrayList<>();
+        try (Statement stmt = ConnectionManager.getConnection().createStatement()){
+            ResultSet resultSet = stmt.executeQuery("SELECT * FROM authors ORDER BY first_name, last_name");
+            while (resultSet.next()) {
+                Author author = new Author();
+                author.setId(resultSet.getLong("id"));
+                author.setFirstName(resultSet.getString("first_name"));
+                author.setLastName(resultSet.getString("last_name"));
+                authors.add(author);
+            }
+        }catch (SQLException e){
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return authors;
+    }
+
     @Override
     public Author getById(Long id) {
         Author author = null;

@@ -15,6 +15,7 @@ public class StatementMenu {
         options.add("Очистить все таблицы");
         options.add("Просмотреть все записи");
         options.add("Добавить дефолтную информацию");
+        options.add("Просмотреть отсортированных авторов по имени и фамилии");
         final String header = MenuUtils.getHeader("Меню Statement", options);
         while (true) {
             System.out.print(header);
@@ -30,6 +31,10 @@ public class StatementMenu {
                     }
                     case 3: {
                         statementAction.addDefaultInfo();
+                        break;
+                    }
+                    case 4: {
+                        statementAction.getAuthorsInfSrtFNLN();
                         break;
                     }
                     case 0: {
