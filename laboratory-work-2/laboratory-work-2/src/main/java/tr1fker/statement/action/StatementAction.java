@@ -215,6 +215,32 @@ public class StatementAction {
         }
     }
 
+    public void getAllBooksByFLAuth(){
+        char firstLetter;
+        while(true){
+            System.out.print("Введите первую букву имени автора: ");
+            String line = InputManager.getNextLine().trim();
+            if (line.isEmpty()){
+                System.out.println("Строка не может быть пустой!");
+            }else if (line.length() > 1){
+                System.out.println("Введите только одну букву!");
+            }else{
+                firstLetter = line.charAt(0);
+                break;
+            }
+        }
+
+        List<Book> books = bookDao.getAllByFLAuth(firstLetter);
+        if (books.isEmpty()){
+            System.out.println("Не было найдено книг с первой буквой имени автора на '" + firstLetter + "'");
+            return;
+        }
+        System.out.println("[Книги с автором на букву '" + firstLetter +"']");
+        for (Book book: books){
+            System.out.println(book);
+        }
+    }
+
     private List<Author> getDefaultAuthors() {
         List<Author> authors = new ArrayList<>();
         authors.add(new Author("Лев", "Толстой"));

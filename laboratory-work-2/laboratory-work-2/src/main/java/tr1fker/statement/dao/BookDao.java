@@ -112,4 +112,24 @@ public class BookDao implements StatementDao<Book> {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Book> getAllByFLAuth(char firstLetter){
+        List<Book> books = new ArrayList<>();
+        try(Statement stmt = ConnectionManager.getConnection().createStatement()){
+            ResultSet resultSet = stmt.executeQuery("SELECT b.* FROM books b JOIN authors a ON b.author_id = a.id " +
+                    "WHERE a.first_name LIKE '" + firstLetter + "%'");
+            while(resultSet.next()){
+                Book book = new Book();
+                book.setId(resultSet.getLong("id"));
+                book.setTitle(resultSet.getString("title"));
+                book.setAuthorId(resultSet.getLong("author_id"));
+                book.setYearOfPublication(resultSet.getInt("year_of_publication"));
+                books.add(book);
+            }
+        }catch (SQLException e) {
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return books;
+    }
 }
