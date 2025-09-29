@@ -81,4 +81,22 @@ public class ShopBookDao implements StatementDao<ShopBook> {
         }
         return shopBook;
     }
+
+    public List<ShopBook> getAllByShopId(long id){
+        List<ShopBook> shopBooks = new ArrayList<>();
+        try (Statement stmt = ConnectionManager.getConnection().createStatement()){
+            ResultSet resultSet = stmt.executeQuery("SELECT * FROM shops_books WHERE shop_id = '" + id + "'");
+            while (resultSet.next()) {
+                ShopBook shopBook = new ShopBook();
+                shopBook.setId(resultSet.getLong("id"));
+                shopBook.setShopId(resultSet.getLong("shop_id"));
+                shopBook.setBookId(resultSet.getLong("book_id"));
+                shopBooks.add(shopBook);
+            }
+        }catch (SQLException e){
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return shopBooks;
+    }
 }

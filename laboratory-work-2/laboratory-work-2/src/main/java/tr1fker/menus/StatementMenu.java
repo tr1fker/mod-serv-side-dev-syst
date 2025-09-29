@@ -17,6 +17,7 @@ public class StatementMenu {
         options.add("Добавить дефолтную информацию");
         options.add("Просмотреть отсортированных авторов по имени и фамилии");
         options.add("Просмотреть книги изданные после определённого года, отсортировав их по году публикации");
+        options.add("Обновить название случайной книги, находящейся в определённом магазине");
         final String header = MenuUtils.getHeader("Меню Statement", options);
         while (true) {
             System.out.print(header);
@@ -40,6 +41,10 @@ public class StatementMenu {
                     }
                     case 5: {
                         statementAction.getBooksSrtYByYear();
+                        break;
+                    }
+                    case 6: {
+                        statementAction.updateNameRandBookByShop();
                         break;
                     }
                     case 0: {

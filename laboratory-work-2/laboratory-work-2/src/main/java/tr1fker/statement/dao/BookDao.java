@@ -103,4 +103,13 @@ public class BookDao implements StatementDao<Book> {
         }
         return book;
     }
+
+    public int updateNameById(long id, String name){
+        try(Statement stmt = ConnectionManager.getConnection().createStatement()){
+            return stmt.executeUpdate("UPDATE books SET title = '" + name + "' WHERE id = '" + id + "'");
+        }catch (SQLException e) {
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 }

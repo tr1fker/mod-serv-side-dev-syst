@@ -9,6 +9,7 @@ import tr1fker.statement.model.Book;
 import tr1fker.statement.model.Shop;
 import tr1fker.statement.model.ShopBook;
 import tr1fker.utils.InputManager;
+import tr1fker.utils.RandomManager;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -20,6 +21,7 @@ public class StatementAction {
     BookDao bookDao = new BookDao();
     ShopDao shopDao = new ShopDao();
     ShopBookDao shopBookDao = new ShopBookDao();
+    RandomManager randomManager = new RandomManager();
     public void deleteAllInfo() {
         System.out.print("Подтвердите удаление всей информации (y / Y): ");
         final String choice = InputManager.getNextLine();
@@ -152,6 +154,64 @@ public class StatementAction {
         System.out.println("[Книги по возрастанию году публикации]");
         for (Book book: books){
             System.out.println(book);
+        }
+    }
+
+    public void updateNameRandBookByShop(){
+        String nameShop;
+        while(true){
+            System.out.print("Введите название магазина: ");
+            nameShop = InputManager.getNextLine();
+            if (nameShop.isEmpty()){
+                System.out.println("Название магазина не может быть пустым!");
+            }else{
+                break;
+            }
+        }
+
+        Shop shop = shopDao.getByName(nameShop);
+        if (shop == null){
+            System.out.println("Магазин с таким названием не найден!");
+            return;
+        }
+        long shopId = shop.getId();
+
+        List<ShopBook> shopBooks = shopBookDao.getAllByShopId(shopId);
+        if (shopBooks.isEmpty()){
+            System.out.println("Данный магазин не содержит никаких книг!");
+            return;
+        }
+        System.out.println("[ShopBook магазина \"" + nameShop + "\"]");
+        for (ShopBook shopBook : shopBooks){
+            System.out.println(shopBook);
+        }
+
+        String newName;
+        while(true){
+            System.out.print("Введите новое название случайной книги: ");
+            newName = InputManager.getNextLine();
+            if (newName.isEmpty()){
+                System.out.println("Название книги не может быть пустым!");
+            }else{
+                break;
+            }
+        }
+
+        int number = RandomManager.getRandomInt(shopBooks.size());
+        long bookId = shopBooks.get(number).getBookId();
+
+        try {
+            int res = bookDao.updateNameById(bookId, newName);
+            if (res == 0){
+                System.out.println("Не удалось изменить название книги!");
+                return;
+            }
+            Book book = bookDao.getById(bookId);
+            System.out.println(book);
+            System.out.println("Книга успешно изменена!");
+        }catch (RuntimeException e){
+            logger.severe("При обновлении нового названия(title:" + newName + ",id:" + bookId
+                    + ") книги произошла ошибка: " + e.getMessage());
         }
     }
 

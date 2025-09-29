@@ -67,8 +67,24 @@ public class ShopDao implements StatementDao<Shop> {
     public Shop getById(Long id) {
         Shop shop = null;
         try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
-            ResultSet resultSet = stmt.executeQuery("SELECT * FROM shops WHERE id = " +
-                    id);
+            ResultSet resultSet = stmt.executeQuery("SELECT * FROM shops WHERE id = " + id);
+            if (resultSet.next()) {
+                shop = new Shop();
+                shop.setId(resultSet.getLong("id"));
+                shop.setName(resultSet.getString("name"));
+                shop.setAddress(resultSet.getString("address"));
+            }
+        } catch (SQLException e) {
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+        return shop;
+    }
+
+    public Shop getByName(String name){
+        Shop shop = null;
+        try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
+            ResultSet resultSet = stmt.executeQuery("SELECT * FROM shops WHERE name = '" + name + "'");
             if (resultSet.next()) {
                 shop = new Shop();
                 shop.setId(resultSet.getLong("id"));
