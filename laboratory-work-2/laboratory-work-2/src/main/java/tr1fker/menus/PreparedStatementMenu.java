@@ -24,6 +24,9 @@ public class PreparedStatementMenu {
         options.add("Найти по email");
         options.add("Найти по возрасту");
         options.add("Отобразить всех студентов");
+        options.add("Добавить дефолтную информацию");
+        options.add("Очистить все таблицы");
+        options.add("Просмотреть все записи");
         final String header = MenuUtils.getHeader("Меню PreparedStatement", options);
         while (true) {
             System.out.print(header);
@@ -67,6 +70,18 @@ public class PreparedStatementMenu {
                     }
                     case 10: {
                         preparedStatementAction.getAllStudents();
+                        break;
+                    }
+                    case 11: {
+                        preparedStatementAction.addDefaultInfStudyGroupsSs();
+                        break;
+                    }
+                    case 12: {
+                        preparedStatementAction.deleteAllInfo();
+                        break;
+                    }
+                    case 13: {
+                        preparedStatementAction.getAllInfo();
                         break;
                     }
                     case 0: {

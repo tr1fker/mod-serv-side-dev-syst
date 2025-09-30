@@ -5,6 +5,7 @@ import tr1fker.prepared_statement.model.Student;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -180,5 +181,14 @@ public class StudentDao implements PreparedStatementDao<Student> {
             students.add(student);
         }
         return students;
+    }
+    public void clearTable() {
+        try (Statement stmt = ConnectionManager.getConnection().createStatement()) {
+            stmt.executeUpdate("DELETE FROM students");
+            stmt.executeUpdate("ALTER SEQUENCE students_id_seq RESTART WITH 1");
+        } catch (SQLException e) {
+            logger.severe("Ошибка: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 }
