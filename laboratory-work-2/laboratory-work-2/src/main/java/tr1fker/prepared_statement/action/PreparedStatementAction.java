@@ -239,9 +239,9 @@ public class PreparedStatementAction {
             return;
         }
         try {
+            studyGroupStudentDao.clearTable();
             studentDao.clearTable();
             studyGroupDao.clearTable();
-            studyGroupStudentDao.clearTable();
             System.out.println("Информация из таблиц была успешно удалена!");
         } catch (RuntimeException e) {
             logger.severe("При удалении информации из таблиц ошибка: " + e.getMessage());
