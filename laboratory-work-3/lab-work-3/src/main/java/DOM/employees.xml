@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Employees>
+    <Employee id="1">
+        <name>AArtyom</name>
+        <gender>male</gender>
+        <age>20</age>
+        <role>programmer</role>
+        <salary>1.0E8</salary>
+        <department location="Minsk">IT</department>
+        <email>my@company.by</email>
+    </Employee>
+</Employees>
