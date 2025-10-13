@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<catalog>
+    <weatherData id="whd101">
+        <city>Москва</city>
+        <date>15/01/2024</date>
+        <temperature>-5°C</temperature>
+        <humidity>78%</humidity>
+    </weatherData>
+    <weatherData id="whd102">
+        <city>Санкт-Петербург</city>
+        <date>15/01/2024</date>
+        <temperature>-3°C</temperature>
+        <humidity>82%</humidity>
+    </weatherData>
+    <weatherData id="whd103">
+        <city>Сочи</city>
+        <date>15/01/2024</date>
+        <temperature>+8°C</temperature>
+        <humidity>65%</humidity>
+    </weatherData>
+    <weatherData id="whd104">
+        <city>Новосибирск</city>
+        <date>15/01/2024</date>
+        <temperature>-12°C</temperature>
+        <humidity>85%</humidity>
+    </weatherData>
+    <weatherData id="whd105">
+        <city>Калининград</city>
+        <date>15/01/2024</date>
+        <temperature>+1°C</temperature>
+        <humidity>75%</humidity>
+    </weatherData>
+</catalog>

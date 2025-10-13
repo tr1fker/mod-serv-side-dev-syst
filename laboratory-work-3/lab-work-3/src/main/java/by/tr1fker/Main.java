@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         String path = new
-                File("D:/Study/Семестр5/MSSDS/laboratory-work-3/lab-work-3/src/main/java/books.xml").getAbsolutePath();
+                File("D:/Study/Семестр5/MSSDS/laboratory-work-3/lab-work-3/src/main/java/by/tr1fker/books.xml").getAbsolutePath();
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
