@@ -1,4 +1,4 @@
-package by.tr1fker;
+package SAMExample;
 
 import org.xml.sax.SAXException;
 

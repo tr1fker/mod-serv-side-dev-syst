@@ -1,4 +1,4 @@
-package by.tr1fker;
+package SAMExample;
 
 import java.util.ArrayList;
 import java.util.List;

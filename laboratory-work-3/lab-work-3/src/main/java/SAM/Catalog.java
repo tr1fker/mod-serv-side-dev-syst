@@ -1,4 +1,4 @@
-package XML;
+package SAM;
 
 import java.util.ArrayList;
 import java.util.Date;

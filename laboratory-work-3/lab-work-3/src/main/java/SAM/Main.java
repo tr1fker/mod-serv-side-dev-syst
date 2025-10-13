@@ -1,4 +1,4 @@
-package XML;
+package SAM;
 
 import org.xml.sax.SAXException;
 
