@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<organization>
+    <organizationName>TechCorp Inc</organizationName>
+    <organizationCode>TC001</organizationCode>
+    <address>123 Business Ave, New York</address>
+    <phoneNumber>+1-555-0123</phoneNumber>
+    <departments>
+        <department>
+            <departmentNumber>D01</departmentNumber>
+            <departmentName>ACCOUNTING</departmentName>
+            <location>NEW YORK</location>
+            <budget>500000</budget>
+            <employees>
+                <employee>
+                    <employeeNumber>E01</employeeNumber>
+                    <employeeName>Tom</employeeName>
+                    <position>Director</position>
+                    <salary>80000.0</salary>
+                </employee>
+                <employee>
+                    <employeeNumber>E02</employeeNumber>
+                    <employeeName>Mary</employeeName>
+                    <managerNumber>E01</managerNumber>
+                    <position>Accountant</position>
+                    <salary>60000.0</salary>
+                </employee>
+            </employees>
+        </department>
+        <department>
+            <departmentNumber>D02</departmentNumber>
+            <departmentName>IT</departmentName>
+            <location>SAN FRANCISCO</location>
+            <budget>800000</budget>
+            <employees>
+                <employee>
+                    <employeeNumber>E03</employeeNumber>
+                    <employeeName>John</employeeName>
+                    <position>IT Manager</position>
+                    <salary>75000.0</salary>
+                </employee>
+                <employee>
+                    <employeeNumber>E04</employeeNumber>
+                    <employeeName>Anna</employeeName>
+                    <managerNumber>E03</managerNumber>
+                    <position>Developer</position>
+                    <salary>55000.0</salary>
+                </employee>
+                <employee>
+                    <employeeNumber>E05</employeeNumber>
+                    <employeeName>Mike</employeeName>
+                    <managerNumber>E03</managerNumber>
+                    <position>Developer</position>
+                    <salary>52000.0</salary>
+                </employee>
+            </employees>
+        </department>
+    </departments>
+</organization>
